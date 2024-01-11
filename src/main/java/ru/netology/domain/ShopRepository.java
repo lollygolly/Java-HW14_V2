@@ -26,6 +26,11 @@ public class ShopRepository {
      * @param product — добавляемый товар
      */
     public void add(Product product) {
+        if (this.findById(product.getId()) != null) {
+            throw new RuntimeException(
+                    "Продукт с ID равным " + product.getId() + " уже добавлен");
+        }
+
         products = addToArray(products, product);
     }
 
