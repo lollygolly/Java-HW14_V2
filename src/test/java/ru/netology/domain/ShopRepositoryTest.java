@@ -29,7 +29,7 @@ public class ShopRepositoryTest {
         repo.add(product2);
         repo.add(product3);
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(NotFoundException.class, () -> {
             repo.remove(55);
         });
     }
@@ -45,7 +45,7 @@ public class ShopRepositoryTest {
         repo.add(product4);
 
 
-        Product[] expected = { product1, product2, product3, product4 };
+        Product[] expected = {product1, product2, product3, product4};
         Product[] actual = repo.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -59,7 +59,7 @@ public class ShopRepositoryTest {
 
         Product product4 = new Product(1, "масло", 104);
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
             repo.add(product4);
         });
     }
