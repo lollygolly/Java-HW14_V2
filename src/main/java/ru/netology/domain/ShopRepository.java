@@ -27,8 +27,7 @@ public class ShopRepository {
      */
     public void add(Product product) {
         if (this.findById(product.getId()) != null) {
-            throw new RuntimeException(
-                    "Продукт с ID равным " + product.getId() + " уже добавлен");
+            throw new AlreadyExistsException(product.getId());
         }
 
         products = addToArray(products, product);
@@ -52,9 +51,7 @@ public class ShopRepository {
     public void remove(int id) {
         Product removingProduct = findById(id);
         if (removingProduct == null) {
-            throw new RuntimeException(
-                    "Продукт с id равным: " + id + " не найден"
-            );
+            throw new NotFoundException(id);
         }
 
         Product[] tmp = new Product[products.length - 1];
